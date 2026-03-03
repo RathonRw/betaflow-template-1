@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import UserBlogs from "@/features/home/blogs";
 
 export const metadata: Metadata = {
@@ -8,7 +9,9 @@ export const metadata: Metadata = {
 export default function UserPage() {
   return (
     <section className="py-16 lg:py-20">
-      <UserBlogs />
+      <Suspense>
+        <UserBlogs />
+      </Suspense>
     </section>
   );
 }

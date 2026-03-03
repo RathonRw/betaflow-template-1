@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import BlogCards from "../blogs/cards";
 import { BlogsCategories } from "../categories";
 import { getMyBlogs } from "../data/blogs";
@@ -29,9 +28,7 @@ export default async function UserBlogs() {
 
   return (
     <>
-      <Suspense>
-        <BlogsCategories categories={categories} />
-      </Suspense>
+      <BlogsCategories categories={categories} />
       <BlogCards blogs={blogs} user={user} />
     </>
   );

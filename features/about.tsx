@@ -82,26 +82,6 @@ export async function UserAbout() {
   if (user === null) {
     return (
       <section className="relative">
-        <div className="flex flex-col gap-5">
-          <Skeleton className="size-16 rounded-full" />
-          <Skeleton className="h-5 w-40" />
-          <div className="flex flex-col gap-2">
-            <Skeleton className="h-5 w-100" />
-            <Skeleton className="h-5 w-100" />
-          </div>
-
-          <div className="flex items-center gap-6">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <Skeleton className="h-5 w-5" key={index} />
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-  if (user === null) {
-    return (
-      <section className="relative">
         <p>User not found</p>
       </section>
     );
@@ -155,6 +135,27 @@ export async function UserAbout() {
           {rateLimit.remaining}, resets at{" "}
           {format(rateLimit.reset, "MMM d, yyyy h:mm a")})
         </p>
+      </div>
+    </section>
+  );
+}
+
+export function UserAboutSkeleton() {
+  return (
+    <section className="relative">
+      <div className="flex flex-col gap-5">
+        <Skeleton className="size-16 rounded-full" />
+        <Skeleton className="h-5 w-40" />
+        <div className="flex flex-col gap-2">
+          <Skeleton className="h-5 w-100" />
+          <Skeleton className="h-5 w-100" />
+        </div>
+
+        <div className="flex items-center gap-6">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <Skeleton className="h-5 w-5" key={index} />
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { BlogsCategories } from "../categories";
 import { getMyFiles } from "../data/files";
 import { getMe } from "../data/user";
@@ -25,9 +24,7 @@ export default async function UserFiles() {
 
   return (
     <>
-      <Suspense>
-        <BlogsCategories categories={categories} />
-      </Suspense>
+      <BlogsCategories categories={categories} />
       <FileCards files={files} user={user} />
     </>
   );

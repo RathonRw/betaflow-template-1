@@ -31,6 +31,14 @@ export async function generateMetadata(props: PageProps<"/files/[slug]">) {
   };
 }
 
+export async function generateStaticParams() {
+  const { data: files } = await getMyFiles();
+
+  return files.slice(0, 5).map((file) => ({
+    slug: file.slug,
+  }));
+}
+
 export default function FilesPage(props: PageProps<"/files/[slug]">) {
   return (
     <Suspense>

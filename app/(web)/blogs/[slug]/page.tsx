@@ -44,6 +44,14 @@ export async function generateMetadata(props: PageProps<"/blogs/[slug]">) {
   };
 }
 
+export async function generateStaticParams() {
+  const { data: blogs } = await getMyBlogs();
+
+  return blogs.slice(0, 5).map((blog) => ({
+    slug: blog.slug,
+  }));
+}
+
 export default function UserBlogPage(props: PageProps<"/blogs/[slug]">) {
   return (
     <Suspense>
