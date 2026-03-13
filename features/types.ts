@@ -1,9 +1,7 @@
 export interface TUser {
-  name: string;
-  username: string;
   displayName: string | null | undefined;
   image: string | null | undefined;
-  updatedAt: number;
+  name: string;
   publicInfo: {
     _id: string;
     _creationTime: number;
@@ -32,44 +30,46 @@ export interface TUser {
       url: string;
     }[];
   } | null;
+  updatedAt: number;
+  username: string;
 }
 
 export interface TBlog {
-  group: {
-    title: string | undefined;
-    slug: string | undefined;
-  };
-  _id: string;
   _creationTime: number;
-  emoji?: string | undefined;
-  description?: string | undefined;
-  coverImage?: string | undefined;
-  updatedAt: number;
-  createdAt: number;
-  status: "draft" | "published" | "archived" | "deleted";
-  title: string;
-  slug: string;
+  _id: string;
   content: string;
   counter: {
     words: number;
     characters: number;
   };
-  isPinned: boolean;
-}
-[];
-
-export interface TFile {
-  updatedAt: number;
+  coverImage?: string | undefined;
   createdAt: number;
-  status: "draft" | "published" | "archived" | "deleted";
-  title: string;
-  slug: string;
-  isPinned: boolean;
-  url: string;
-  contentType: string | undefined;
-  size: number | undefined;
+  description?: string | undefined;
+  emoji?: string | undefined;
   group: {
     title: string | undefined;
     slug: string | undefined;
   };
+  isPinned: boolean;
+  slug: string;
+  status: "draft" | "published" | "archived" | "deleted";
+  title: string;
+  updatedAt: number;
+}
+[];
+
+export interface TFile {
+  contentType: string | undefined;
+  createdAt: number;
+  group: {
+    title: string | undefined;
+    slug: string | undefined;
+  };
+  isPinned: boolean;
+  size: number | undefined;
+  slug: string;
+  status: "draft" | "published" | "archived" | "deleted";
+  title: string;
+  updatedAt: number;
+  url: string;
 }

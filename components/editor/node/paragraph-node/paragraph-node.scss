@@ -1,0 +1,306 @@
+.tiptap.ProseMirror {
+  --tt-collaboration-carets-label: rgba(44, 44, 43, 1);
+  --link-text-color: rgba(98, 41, 255, 1);
+  --thread-text: rgba(44, 44, 43, 1);
+  --placeholder-color: rgba(40, 44, 51, 0.42);
+  --thread-bg-color: hsla(50, 100%, 77%, 1);
+
+  // ai
+  --tiptap-ai-insertion-color: rgba(84, 0, 229, 1);
+
+  .dark & {
+    --tt-collaboration-carets-label: rgba(32, 32, 34, 1);
+    --link-text-color: rgba(122, 82, 255, 1);
+    --thread-text: rgba(245, 245, 245, 1);
+    --placeholder-color: rgba(244, 244, 255, 0.37);
+    --thread-bg-color: hsla(52, 100%, 32%, 1);
+
+    --tiptap-ai-insertion-color: rgba(122, 82, 255, 1);
+  }
+}
+
+/* Ensure each top-level node has relative positioning 
+   so absolutely positioned placeholders work correctly */
+.tiptap.ProseMirror > * {
+  position: relative;
+}
+
+/* =====================
+     CORE EDITOR STYLES
+     ===================== */
+.tiptap.ProseMirror {
+  white-space: pre-wrap;
+  outline: none;
+  // caret-color: var(--tt-cursor-color);
+
+  // Paragraph spacing
+  p:not(:first-child):not(td p):not(th p) {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: normal;
+    margin-top: 10px;
+  }
+
+  // Selection styles
+  &:not(.readonly):not(.ProseMirror-hideselection) {
+    ::selection {
+      background-color: var(--tt-color-highlight-blue);
+    }
+
+    .selection::selection {
+      background: transparent;
+    }
+  }
+
+  .selection {
+    display: inline;
+    background-color: var(--tt-color-highlight-blue);
+  }
+
+  // Selected node styles
+  .ProseMirror-selectednode:not(img):not(pre):not(.react-renderer) {
+    border-radius: var(--tt-radius-md);
+    background-color: var(--tt-selection-color);
+  }
+
+  .ProseMirror-hideselection {
+    caret-color: transparent;
+  }
+
+  // Resize cursor
+  &.resize-cursor {
+    cursor: ew-resize;
+    cursor: col-resize;
+  }
+}
+
+/* =====================
+     TEXT DECORATION
+     ===================== */
+.tiptap.ProseMirror {
+  // Text decoration inheritance for spans
+  a span {
+    text-decoration: underline;
+  }
+
+  s span {
+    text-decoration: line-through;
+  }
+
+  u span {
+    text-decoration: underline;
+  }
+
+  .tiptap-ai-insertion {
+    color: var(--tiptap-ai-insertion-color);
+  }
+}
+
+/* =====================
+     COLLABORATION
+     ===================== */
+.tiptap.ProseMirror {
+  .collaboration-carets {
+    &__caret {
+      border-right: 1px solid transparent;
+      border-left: 1px solid transparent;
+      pointer-events: none;
+      margin-left: -1px;
+      margin-right: -1px;
+      position: relative;
+      word-break: normal;
+    }
+
+    &__label {
+      color: var(--tt-collaboration-carets-label);
+      border-radius: 0.25rem;
+      border-bottom-left-radius: 0;
+      font-size: 0.75rem;
+      font-weight: 600;
+      left: -1px;
+      line-height: 1;
+      padding: 0.125rem 0.375rem;
+      position: absolute;
+      top: -1.3em;
+      user-select: none;
+      white-space: nowrap;
+    }
+  }
+}
+
+/* =====================
+     EMOJI
+     ===================== */
+.tiptap.ProseMirror [data-type="emoji"] img {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  cursor: text;
+}
+
+/* =====================
+     LINKS
+     ===================== */
+.tiptap.ProseMirror {
+  a {
+    color: var(--muted-foreground);
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 1.5px;
+    font-weight: 600;
+  }
+  h1 a,
+  h2 a,
+  h3 a {
+    color: var(--foreground);
+  }
+  a:hover {
+    color: var(--foreground);
+  }
+  .react-tweet-theme a {
+    color: inherit;
+    text-decoration: none;
+    text-decoration-thickness: 0;
+    text-underline-offset: 0;
+  }
+  .react-tweet-theme .tweet-header-module__Ur1JTW__username span {
+    color: var(--muted-foreground);
+    text-decoration: none;
+  }
+  .tweet-header-module__Ur1JTW__authorLinkText span {
+    text-decoration: none;
+  }
+  .tweet-replies-module__cuA38a__link span {
+    color: rgb(0, 111, 214);
+    text-decoration: none;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+/* =====================
+     MENTION
+     ===================== */
+.tiptap.ProseMirror {
+  [data-type="mention"] {
+    display: inline-block;
+    color: var(--tt-brand-color-500);
+  }
+}
+
+/* =====================
+     THREADS
+     ===================== */
+.tiptap.ProseMirror {
+  // Base styles for inline threads
+  .tiptap-thread.tiptap-thread--unresolved.tiptap-thread--inline {
+    transition:
+      color 0.2s ease-in-out,
+      background-color 0.2s ease-in-out;
+    color: var(--thread-text);
+    border-bottom: 2px dashed var(--tt-color-yellow-base);
+    font-weight: 600;
+
+    &.tiptap-thread--selected,
+    &.tiptap-thread--hovered {
+      background-color: var(--thread-bg-color);
+      border-bottom-color: transparent;
+    }
+  }
+
+  // Block thread styles with images
+  .tiptap-thread.tiptap-thread--unresolved.tiptap-thread--block {
+    &:has(img) {
+      outline: 0.125rem solid var(--tt-color-yellow-base);
+      border-radius: var(--tt-radius-xs, 0.25rem);
+      overflow: hidden;
+      width: fit-content;
+
+      &.tiptap-thread--selected {
+        outline-width: 0.25rem;
+        outline-color: var(--tt-color-yellow-base);
+      }
+
+      &.tiptap-thread--hovered {
+        outline-width: 0.25rem;
+      }
+    }
+
+    // Block thread styles without images
+    &:not(:has(img)) {
+      border-radius: 0.25rem;
+      border-bottom: 0.125rem dashed var(--tt-color-yellow-base);
+      border-top: 0.125rem dashed var(--tt-color-yellow-base);
+      // padding-bottom: 0.5rem;
+      outline: 0.25rem solid transparent;
+
+      &.tiptap-thread--hovered,
+      &.tiptap-thread--selected {
+        background-color: var(--tt-color-yellow-base);
+        outline-color: var(--tt-color-yellow-base);
+      }
+    }
+  }
+
+  // Resolved thread styles
+  .tiptap-thread.tiptap-thread--resolved.tiptap-thread--inline.tiptap-thread--selected {
+    background-color: var(--tt-color-yellow-base);
+    border-color: transparent;
+    opacity: 0.5;
+  }
+
+  // React renderer specific styles
+  .tiptap-thread.tiptap-thread--block:has(.react-renderer) {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+}
+
+/* =====================
+     PLACEHOLDER
+     ===================== */
+.is-empty:not(.with-slash)[data-placeholder]:has(
+    > .ProseMirror-trailingBreak:only-child
+  )::before {
+  content: attr(data-placeholder);
+}
+
+.is-empty.with-slash[data-placeholder]:has(
+    > .ProseMirror-trailingBreak:only-child
+  )::before {
+  content: "Write, type '/' for commands…";
+  font-style: italic;
+}
+
+.is-empty[data-placeholder]:has(
+    > .ProseMirror-trailingBreak:only-child
+  ):before {
+  pointer-events: none;
+  height: 0;
+  position: absolute;
+  width: 100%;
+  text-align: inherit;
+  left: 0;
+  right: 0;
+}
+
+.is-empty[data-placeholder]:has(> .ProseMirror-trailingBreak):before {
+  color: var(--placeholder-color);
+}
+
+/* =====================
+     DROPCURSOR
+     ===================== */
+.prosemirror-dropcursor-block,
+.prosemirror-dropcursor-inline {
+  background: rgba(122, 82, 255, 1) !important;
+  border-radius: 0.25rem;
+  margin-left: -1px;
+  margin-right: -1px;
+  width: 100%;
+  height: 0.188rem;
+  cursor: grabbing;
+}

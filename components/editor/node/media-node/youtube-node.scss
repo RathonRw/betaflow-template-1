@@ -1,0 +1,9 @@
+.editor-content [data-youtube-video] {
+  margin: 1rem 0;
+}
+.editor-content [data-youtube-video] iframe {
+  border-radius: 16px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}

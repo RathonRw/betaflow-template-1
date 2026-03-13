@@ -1,0 +1,70 @@
+/* Table Node Styles */
+.tiptap.ProseMirror {
+  --t-border: oklch(0.922 0 0);
+  --t-muted: oklch(0.97 0 0);
+
+  .dark & {
+    --t-border: oklch(1 0 0 / 10%);
+    --t-muted: oklch(0.269 0 0);
+  }
+}
+
+.tiptap {
+  table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+
+    td,
+    th {
+      min-width: 1em;
+      border: 1px solid var(--t-border); // Using CSS var from system
+      padding: 3px 5px;
+      vertical-align: top;
+      box-sizing: border-box;
+      position: relative;
+
+      > * {
+        margin-bottom: 0;
+      }
+    }
+
+    th {
+      font-weight: 600;
+      text-align: left;
+      background-color: var(--t-muted);
+    }
+
+    .selectedCell:after {
+      z-index: 2;
+      position: absolute;
+      content: "";
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: var(--t-muted);
+      pointer-events: none;
+    }
+
+    .column-resize-handle {
+      position: absolute;
+      right: 0px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: #adf;
+      pointer-events: none;
+    }
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+  }
+}
+
+.resize-cursor {
+  cursor: col-resize;
+}

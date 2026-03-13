@@ -1,0 +1,107 @@
+.tiptap.ProseMirror {
+  /* LIGHT MODE */
+  --code-bg: #f6f8fa;
+  --code-fg: #24292f;
+  --code-comment: #6e7781;
+  --code-keyword: #cf222e;
+  --code-string: #0a3069;
+  --code-number: #0550ae;
+  --code-title: #8250df;
+  --code-attr: #953800;
+
+  .dark & {
+    /* DARK MODE */
+    --code-bg: #0d1117;
+    --code-fg: #e6edf3;
+    --code-comment: #8b949e;
+    --code-keyword: #ff7b72;
+    --code-string: #a5d6ff;
+    --code-number: #79c0ff;
+    --code-title: #d2a8ff;
+    --code-attr: #ffa657;
+  }
+}
+
+.tiptap {
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    border-radius: 0.6rem;
+    padding: 0.9rem 1.1rem;
+    margin: 1.5rem 0;
+    font-family: "JetBrainsMono", monospace;
+    overflow-x: auto;
+  }
+
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: 0.85rem;
+  }
+
+  pre {
+    border: 1px solid oklch(0.9 0 0 / 0.2);
+  }
+  .dark pre {
+    border: 1px solid oklch(1 0 0 / 0.1);
+  }
+
+  /* comments */
+  .hljs-comment,
+  .hljs-quote {
+    color: var(--code-comment);
+    font-style: italic;
+  }
+
+  /* variables, tags */
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-attribute,
+  .hljs-tag,
+  .hljs-name,
+  .hljs-selector-id,
+  .hljs-selector-class {
+    color: var(--code-attr);
+  }
+
+  /* numbers / builtins */
+  .hljs-number,
+  .hljs-meta,
+  .hljs-built_in,
+  .hljs-builtin-name,
+  .hljs-literal,
+  .hljs-type,
+  .hljs-params {
+    color: var(--code-number);
+  }
+
+  /* strings */
+  .hljs-string,
+  .hljs-symbol,
+  .hljs-bullet {
+    color: var(--code-string);
+  }
+
+  /* functions / titles */
+  .hljs-title,
+  .hljs-section {
+    color: var(--code-title);
+    font-weight: 600;
+  }
+
+  /* keywords */
+  .hljs-keyword,
+  .hljs-selector-tag {
+    color: var(--code-keyword);
+    font-weight: 600;
+  }
+
+  .hljs-emphasis {
+    font-style: italic;
+  }
+
+  .hljs-strong {
+    font-weight: 700;
+  }
+}

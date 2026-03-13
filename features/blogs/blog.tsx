@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { Share2Icon } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
+import { Editor } from "@/components/editor";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { getUserInitials } from "@/lib/utils";
@@ -84,14 +85,7 @@ export default function UserBlog({
         </div>
       </div>
       <div className="mx-auto w-full max-w-4xl px-2">
-        {blog.content}
-        {/* <TipTapEditor
-          content={blog.content}
-          editable={false}
-          onChange={(content) => {
-            console.log(content);
-          }}
-        /> */}
+        <Editor content={blog.content} />
       </div>
     </div>
   );
