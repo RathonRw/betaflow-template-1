@@ -5,7 +5,6 @@ import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { Color } from "@tiptap/extension-color";
 import Document from "@tiptap/extension-document";
 import { Highlight } from "@tiptap/extension-highlight";
-// import HorizontalRule from "@tiptap/extension-horizontal-rule";
 import Image from "@tiptap/extension-image";
 import { TaskItem, TaskList } from "@tiptap/extension-list";
 import {
