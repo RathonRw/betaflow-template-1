@@ -1,10 +1,19 @@
 export interface TUser {
-  displayName: string | null | undefined;
-  image: string | null | undefined;
+  displayName?: string | null;
+  image?: string | null;
+  // Identity
   name: string;
-  publicInfo: {
-    _id: string;
-    _creationTime: number;
+
+  // Public Profile
+  publicInfo?: {
+    bio: string;
+
+    socialMediaAccounts: {
+      platform: string;
+      url: string;
+    }[];
+
+    // UI Preferences
     blogView: {
       showTitle: boolean;
       showDescription: boolean;
@@ -23,53 +32,64 @@ export interface TUser {
       showFileType: boolean;
       showFileSize: boolean;
     };
-
-    bio: string;
-    socialMediaAccounts: {
-      platform: string;
-      url: string;
-    }[];
   } | null;
+
+  // Timestamps
   updatedAt: number;
   username: string;
 }
 
 export interface TBlog {
-  _creationTime: number;
-  _id: string;
+  // Content
   content: string;
+
+  // Analytics
   counter: {
     words: number;
     characters: number;
   };
-  coverImage?: string | undefined;
+  coverImage?: string;
+
+  // Timestamps
   createdAt: number;
-  description?: string | undefined;
-  emoji?: string | undefined;
+  description?: string;
+  emoji?: string;
+
+  // Grouping
   group: {
-    title: string | undefined;
-    slug: string | undefined;
+    title?: string;
+    slug?: string;
   };
   isPinned: boolean;
   slug: string;
+
+  // Metadata
   status: "draft" | "published" | "archived" | "deleted";
+  // Identity
   title: string;
   updatedAt: number;
 }
-[];
-
 export interface TFile {
-  contentType: string | undefined;
+  contentType?: string;
+
+  // Timestamps
   createdAt: number;
+
+  // Grouping
   group: {
-    title: string | undefined;
-    slug: string | undefined;
+    title?: string;
+    slug?: string;
   };
   isPinned: boolean;
-  size: number | undefined;
+  size?: number;
   slug: string;
+
+  // Metadata
   status: "draft" | "published" | "archived" | "deleted";
+  // Identity
   title: string;
   updatedAt: number;
+
+  // File Data
   url: string;
 }

@@ -1,11 +1,11 @@
 .tiptap.ProseMirror {
   /* LIGHT MODE */
-  --code-bg: #f6f8fa;
+  --code-bg: #42230308;
   --code-fg: #000000;
 
   .dark & {
     /* DARK MODE */
-    --code-bg: #000000;
+    --code-bg: #fcfcfc08;
     --code-fg: #e6edf3;
   }
 }
@@ -14,6 +14,7 @@
   pre {
     background: var(--code-bg);
     color: var(--code-fg);
+    font-size: 14px;
     border-radius: 0.6rem;
     padding: 0.9rem 1.1rem;
     margin: 1.5rem 0;

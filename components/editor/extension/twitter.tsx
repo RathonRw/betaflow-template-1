@@ -44,6 +44,7 @@ export interface TwitterOptions {
    */
   addPasteHandler: boolean;
 
+  // biome-ignore lint/suspicious/noExplicitAny: The HTML attributes can be of any type, so we use `any` here.
   HTMLAttributes: Record<string, any>;
 
   /**

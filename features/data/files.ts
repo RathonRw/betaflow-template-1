@@ -7,14 +7,14 @@ export interface FilesResponse {
 }
 
 export async function getMyFiles(): Promise<FilesResponse> {
-  const baseUrl = process.env.NEXT_PUBLIC_CONVEX_SITE_URL;
-  const apiKey = process.env.USER_API_KEY;
+  const baseUrl = process.env.NEXT_PUBLIC_BETAFLOW_API_URL;
+  const apiKey = process.env.BETAFLOW_API_KEY;
 
   if (!baseUrl) {
-    throw new Error("NEXT_PUBLIC_CONVEX_SITE_URL is not set");
+    throw new Error("NEXT_PUBLIC_BETAFLOW_API_URL is not set");
   }
   if (!apiKey) {
-    throw new Error("USER_API_KEY is not set");
+    throw new Error("BETAFLOW_API_KEY is not set");
   }
 
   let res: Response;
@@ -37,6 +37,13 @@ export async function getMyFiles(): Promise<FilesResponse> {
     throw new Error(
       `Rate limit exceeded. Plan: ${rateLimit.plan} (${rateLimit.limit}/month). Resets at ${rateLimit.reset}`,
     );
+  }
+
+  if (res.status === 404) {
+    return {
+      data: [],
+      rateLimit: extractRateLimit(res.headers),
+    };
   }
 
   if (!res.ok) {
